@@ -24,7 +24,6 @@ script:
 - docker run -d -t -p 127.0.0.1:8080:8080 --network my-network --name example_api swagger-spring-example:1.0.0
 - docker run -d -p 27017:27017 --network my-network --name mongodb mongo:4
 - docker ps
-- python -m unittest discover
 - count=0 && until $(curl --output /dev/null --silent --head --fail http://localhost:8080);
   do printf '.' && sleep 3 && count=$((count+1)) && if [ $count -gt 5 ]; then break;
   fi; done
