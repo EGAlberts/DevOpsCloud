@@ -11,7 +11,7 @@ from swagger_server.models import Student
 
 #db_dir_path = tempfile.gettempdir()
 #db_file_path = os.path.join(db_dir_path, "students.json")
-client = pymongo.MongoClient("mongodb://127.0.0.1:27017/")
+client = pymongo.MongoClient("mongodb://mongodb:27017/")
 
 
 
