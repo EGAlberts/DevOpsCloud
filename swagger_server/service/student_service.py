@@ -17,7 +17,6 @@ student_db = TinyDB(db_file_path)
 
 def add_student(student):
     student_dict = student.to_dict()
-    print(student_dict)
     if(not student_dict["first_name"] or not student_dict["last_name"]):
         return 'invalid request, field missing (last or first name)', 405
 
