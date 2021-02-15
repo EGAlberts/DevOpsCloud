@@ -11,7 +11,7 @@ from swagger_server.models import Student
 
 #db_dir_path = tempfile.gettempdir()
 #db_file_path = os.path.join(db_dir_path, "students.json")
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb://127.0.0.1:27017/")
 
 
 
@@ -36,8 +36,7 @@ def add_student(student):
 
     res = col.find_one(query)
 
-    print('result is')
-    print(res)
+
     
     if res:
         return 'already exists', 409
@@ -45,14 +44,11 @@ def add_student(student):
     latest_id = 0
 
     for doc in col.find().sort('_id', pymongo.DESCENDING):
-        print("found doc: ")
-        print(doc)
         latest_id = int(str(doc["_id"]))
         break
 
     new_id = latest_id + 1
     student_dict["_id"] = new_id
-    print(student_dict)
 
     doc_id = col.insert_one(student_dict).inserted_id
     student.student_id = doc_id
@@ -69,9 +65,6 @@ def get_student_by_id(student_id, subject):
     if not student:
         return student
     
-    print("retrieved student: ")
-    print(student)
-
     student = Student.from_dict(student)
     if not subject:
         return student
